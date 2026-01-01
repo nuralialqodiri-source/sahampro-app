@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamPro App by.nurali</title>
+    <style>
+        :root { --gold: #ffcc00; --dark: #121212; --card-bg: #1e1e1e; --green: #00ff88; --red: #ff4d4d; }
+        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 80px; }
+        
+        .navbar { position: fixed; bottom: 0; width: 100%; background: #222; display: flex; justify-content: space-around; padding: 12px 0; border-top: 2px solid var(--gold); z-index: 1000; }
+        .nav-item { color: #888; text-decoration: none; font-size: 0.75em; text-align: center; cursor: pointer; flex: 1; }
+        .nav-item.active { color: var(--gold); font-weight: bold; }
+
+        .header-bar { background: var(--card-bg); padding: 20px; text-align: center; border-bottom: 1px solid #333; }
+        .header-bar h1 { margin: 0; font-size: 1.4em; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+
+        .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-left: 4px solid var(--gold); }
+        .card-red { border-left-color: var(--red); }
+        .card-green { border-left-color: var(--green); }
+
+        .title { color: var(--gold); font-size: 1.2em; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .content-text { font-size: 0.9em; line-height: 1.6; color: #ddd; }
+        
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #333; background: #2a2a2a; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; color: #000; }
+        
+        .stress-test-item { background: rgba(255, 77, 77, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid rgba(255, 77, 77, 0.3); }
+        .protocol-box { background: rgba(0, 255, 136, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid rgba(0, 255, 136, 0.3); }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <h1>SahamPro App</h1>
+        <div style="font-size: 0.7em; color: #888; letter-spacing: 1px;">Audit & Resilience by.nurali</div>
+    </div>
+
+    <div id="calc-page" class="page active">
+        <div class="card">
+            <div class="title">📊 Audit Investasi</div>
+            <label>Harga Saham (IDR)</label>
+            <input type="number" id="harga" placeholder="Contoh: 7500">
+            <label>Jumlah Lot</label>
+            <input type="number" id="lot" placeholder="Contoh: 100">
+            <button onclick="hitungAudit()">CEK MODAL BERSIH</button>
+            <div id="res-box" style="margin-top:20px; text-align:center; display:none;">
+                <div style="color:#888;">Total (Inc. Fee Beli 0.2%)</div>
+                <div id="total-res" style="color:var(--green); font-size: 1.8em; font-weight:bold;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stress-page" class="page">
+        <div class="card card-red">
+            <div class="title">🌑 Analisis Black Swan</div>
+            <div class="content-text">
+                Apa yang terjadi jika ekonomi Indonesia melambat drastis (GDP < 4%) atau Rupiah terdepresiasi ekstrem?
+            </div>
+            <div class="stress-test-item">
+                <strong>Skenario Terburuk:</strong> IHSG Drop > 20% dalam sebulan & Suku Bunga Melonjak.
+            </div>
+        </div>
+
+        <div class="card card-green">
+            <div class="title">🛡️ Protokol Resiliensi</div>
+            <div class="protocol-box">
+                <strong>1. Fundamental Check:</strong> Jika perusahaan masih mencetak laba tumbuh, <strong>HOLD / ADD POSITION</strong>.
+            </div>
+            <div class="protocol-box">
+                <strong>2. Defensive Move:</strong> Perbanyak porsi di saham USD-earner atau konsumer kuat (Contoh: <strong>ICBP</strong>).
+            </div>
+            <div class="protocol-box">
+                <strong>3. Cash Reserve:</strong> Pastikan dana cadangan siap untuk membeli "barang bagus di harga diskon".
+            </div>
+        </div>
+    </div>
+
+    <div id="legend-page" class="page">
+        <div class="card">
+            <div class="title">🏛️ Wall of Fame</div>
+            <p><strong>Lo Kheng Hong:</strong> "Beli saham salah harga, lalu ditinggal tidur."</p>
+            <p><strong>Warren Buffett:</strong> "Be fearful when others are greedy, and greedy when others are fearful."</p>
+            <p><strong>Peter Lynch:</strong> "Know what you own, and know why you own it."</p>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-item active" onclick="showPage('calc-page', this)">
+            <div>📊</div><div>Audit</div>
+        </div>
+        <div class="nav-item" onclick="showPage('stress-page', this)">
+            <div>🛡️</div><div>Resiliensi</div>
+        </div>
+        <div class="nav-item" onclick="showPage('legend-page', this)">
+            <div>🏛️</div><div>Legenda</div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId, element) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function hitungAudit() {
+            const h = document.getElementById('harga').value;
+            const l = document.getElementById('lot').value;
+            if(!h || !l) return alert("Lengkapi data!");
+            const total = (h * l * 100) * 1.002;
+            document.getElementById('res-box').style.display = 'block';
+            document.getElementById('total-res').innerText = "Rp " + Math.round(total).toLocaleString('id-ID');
+        }
+    </script>
+</body>
+</html>

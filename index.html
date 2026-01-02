@@ -16,7 +16,6 @@
         h1, h2, h3 { color: var(--gold); margin-top: 0; }
         h2 { font-size: 18px; border-left: 4px solid var(--gold); padding-left: 10px; }
         
-        /* JAM & STATUS MARKET */
         .market-status { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--gold); }
         #clock { font-weight: bold; font-size: 18px; color: var(--gold); }
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
@@ -31,7 +30,13 @@
         .page { display: none; padding: 20px; min-height: 100vh; }
         .active { display: block; }
         .back-btn { background: none; border: 1px solid var(--gold); color: var(--gold); width: auto; padding: 8px 20px; margin-bottom: 20px; border-radius: 5px; cursor: pointer; }
-        .quote { font-style: italic; color: var(--gold); margin: 10px 0; display: block; border-left: 2px solid #555; padding-left: 10px; }
+        
+        /* STYLE VIRTUAL TRADE */
+        .balance-box { background: #222; border: 1px solid var(--gold); padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 15px; }
+        .balance-amount { font-size: 22px; color: var(--green); font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { color: var(--gold); font-size: 12px; text-align: left; padding: 8px; border-bottom: 1px solid #444; }
+        td { padding: 8px; font-size: 12px; border-bottom: 1px solid #333; }
     </style>
 </head>
 <body>
@@ -39,151 +44,65 @@
 <div id="main-page" class="page active">
     <div class="container">
         <div style="text-align: center; padding: 20px;">
-            <img src="icon.png" style="width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover;">
-            <h1>SAHAMPro <span style="font-size: 12px; color: #888;">by.nurali</span></h1>
-            <p style="font-size: 10px; letter-spacing: 2px; color: #aaa;">INVESTMENT AUDIT & RESILIENCE</p>
+            <img src="icon.png" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover;">
+            <h1>SAHAMPro</h1>
+            <div id="clock" style="font-size: 14px; color: var(--gold);">00:00:00</div>
         </div>
 
-        <div class="market-status">
-            <div>
-                <div style="font-size: 10px; color: #888;">WAKTU (WIB)</div>
-                <div id="clock">00:00:00</div>
-            </div>
-            <div id="status-badge" class="badge">Checking...</div>
+        <div class="nav-grid">
+            <a href="javascript:void(0)" onclick="showPage('page-virtual')" class="nav-btn" style="background: var(--gold); color: black;">VIRTUAL TRADING</a>
+            <a href="javascript:void(0)" onclick="showPage('page-history')" class="nav-btn">SEJARAH LEGENDA</a>
         </div>
 
-        <div class="card">
-            <h2>Pusat Data Emiten</h2>
-            <input type="text" id="ticker" placeholder="Masukkan Kode Saham (BBRI, BMRI...)">
-            <button onclick="window.open('https://www.google.com/search?q=laporan+tahunan+saham+' + document.getElementById('ticker').value, '_blank')">CEK LAPORAN KEUANGAN</button>
-        </div>
-
-        <div class="card">
-            <h2>Sejarah Legenda</h2>
-            <div class="nav-grid">
-                <a href="javascript:void(0)" onclick="showPage('page-buffett')" class="nav-btn">WARREN BUFFETT</a>
-                <a href="javascript:void(0)" onclick="showPage('page-lkh')" class="nav-btn">LO KHENG HONG</a>
-                <a href="javascript:void(0)" onclick="showPage('page-graham')" class="nav-btn">BENJAMIN GRAHAM</a>
-                <a href="javascript:void(0)" onclick="showPage('page-munger')" class="nav-btn">CHARLIE MUNGER</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Audit Kriteria LKH</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <input type="number" id="pbv" step="0.01" placeholder="PBV">
-                <input type="number" id="per" step="0.1" placeholder="PER">
-            </div>
-            <button onclick="auditLKH()" style="margin-top: 10px; background: #333; color: var(--gold); border: 1px solid var(--gold);">CEK KELAYAKAN</button>
-            <div id="auditResult" style="margin-top:15px; text-align:center; font-weight:bold;"></div>
+        <div class="card" style="margin-top:20px;">
+            <h2>Pusat Data & Audit</h2>
+            <input type="text" id="ticker" placeholder="Kode Saham">
+            <button onclick="window.open('https://www.google.com/search?q=harga+saham+' + document.getElementById('ticker').value, '_blank')">CEK PASAR RIEL</button>
         </div>
     </div>
 </div>
 
-<div id="page-buffett" class="page">
+<div id="page-virtual" class="page">
     <div class="container">
         <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
+        <h2>Simulasi Investasi</h2>
+        <div class="balance-box">
+            <div style="font-size: 12px; color: #888;">SALDO VIRTUAL</div>
+            <div id="v-balance" class="balance-amount">Rp 100.000.000</div>
+        </div>
+
         <div class="card">
-            <h1>Warren Buffett</h1>
-            <span class="quote">"Price is what you pay. Value is what you get."</span>
-            <p>Investor paling sukses sepanjang masa. Ia memimpin Berkshire Hathaway dan fokus pada investasi jangka panjang di perusahaan yang memiliki keunggulan kompetitif abadi.</p>
+            <h3>Beli Saham (Simulasi)</h3>
+            <input type="text" id="v-ticker" placeholder="Kode Saham (Contoh: BBRI)">
+            <input type="number" id="v-price" placeholder="Harga Saham Saat Ini">
+            <input type="number" id="v-lot" placeholder="Jumlah Lot">
+            <button onclick="buyStock()">BELI SAHAM</button>
+        </div>
+
+        <div class="card">
+            <h3>Portofolio Virtual</h3>
+            <table>
+                <thead>
+                    <tr><th>SAHAM</th><th>LOT</th><th>MODAL</th></tr>
+                </thead>
+                <tbody id="v-portfolio"></tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<div id="page-lkh" class="page">
+<div id="page-history" class="page">
     <div class="container">
         <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <div class="card">
-            <h1>Lo Kheng Hong</h1>
-            <span class="quote">"Harta karun terbesar di dunia ada di pasar modal."</span>
-            <p>Triliuner saham Indonesia yang hidup santai (Financial Freedom) berkat disiplin membaca laporan keuangan dan membeli saham salah harga.</p>
+        <h2>Daftar Legenda</h2>
+        <div class="nav-grid">
+            <button onclick="alert('Warren Buffett: Fokus Jangka Panjang')" class="nav-btn">BUFFETT</button>
+            <button onclick="alert('LKH: Membaca Laporan Keuangan')" class="nav-btn">LO KHENG HONG</button>
+            <button onclick="alert('Graham: Margin of Safety')" class="nav-btn">BEN GRAHAM</button>
+            <button onclick="alert('Munger: Model Mental')" class="nav-btn">MUNGER</button>
         </div>
+        <p style="margin-top:20px; font-size:12px; color:#888;">*Klik tombol di atas untuk prinsip utama masing-masing legenda.</p>
     </div>
 </div>
 
-<div id="page-graham" class="page">
-    <div class="container">
-        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <div class="card">
-            <h1>Benjamin Graham</h1>
-            <p style="color: var(--gold);"><i>The Father of Value Investing</i></p>
-            <span class="quote">"Buy when the market is pessimistic, sell when it's optimistic."</span>
-            <hr border="1" color="#333">
-            <p>Guru dari Warren Buffett dan penulis buku legendaris "The Intelligent Investor". Graham mengajarkan konsep **Margin of Safety** (Batas Aman).</p>
-            <h3>Prinsip Utama:</h3>
-            <ul>
-                <li>Bedakan antara Investasi dan Spekulasi.</li>
-                <li>Gunakan angka riil (Aset & Laba) sebagai panduan, bukan perasaan.</li>
-                <li>Mr. Market adalah pelayan Anda, bukan penasihat Anda.</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div id="page-munger" class="page">
-    <div class="container">
-        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <div class="card">
-            <h1>Charlie Munger</h1>
-            <p style="color: var(--gold);"><i>The Architect of Berkshire Hathaway</i></p>
-            <span class="quote">"The big money is not in the buying and the selling, but in the waiting."</span>
-            <hr border="1" color="#333">
-            <p>Sahabat setia Buffett yang merubah strategi Buffett dari membeli "perusahaan murah" menjadi membeli "perusahaan hebat di harga wajar".</p>
-            <h3>Prinsip Utama:</h3>
-            <ul>
-                <li>Terus belajar dan memiliki banyak model mental.</li>
-                <li>Hindari kesalahan bodoh daripada berusaha menjadi sangat pintar.</li>
-                <li>Disiplin tinggi untuk tidak melakukan apa-apa saat tidak ada peluang bagus.</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<script>
-    function showPage(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo(0,0);
-    }
-
-    function updateClock() {
-        const now = new Date();
-        const hrs = now.getHours();
-        const mins = now.getMinutes();
-        const day = now.getDay();
-        const timeStr = now.toLocaleTimeString('id-ID');
-        document.getElementById('clock').innerText = timeStr;
-
-        const badge = document.getElementById('status-badge');
-        if (day >= 1 && day <= 5) {
-            if ((hrs == 9 && mins >= 0) || (hrs > 9 && hrs < 16)) {
-                badge.innerText = "MARKET OPEN";
-                badge.className = "badge open";
-            } else {
-                badge.innerText = "MARKET CLOSED";
-                badge.className = "badge closed";
-            }
-        } else {
-            badge.innerText = "MARKET CLOSED (WEEKEND)";
-            badge.className = "badge closed";
-        }
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function auditLKH() {
-        let pbv = document.getElementById('pbv').value;
-        let per = document.getElementById('per').value;
-        let res = document.getElementById('auditResult');
-        if(pbv > 0 && pbv < 1 && per < 10) {
-            res.style.color = "var(--green)";
-            res.innerText = "✓ SANGAT LAYAK (Kriteria LKH)";
-        } else {
-            res.style.color = "var(--red)";
-            res.innerText = "✗ KURANG IDEAL / MAHAL";
-        }
-    }
-</script>
-</body>
-</html>
+    

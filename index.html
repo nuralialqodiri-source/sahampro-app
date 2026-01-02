@@ -4,95 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SahamPro by.nurali</title>
-    
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#D4AF37">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --gold: #D4AF37;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text: #e0e0e0;
-        }
-        body { font-family: 'Roboto', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; padding: 15px; }
-        .container { max-width: 600px; margin: auto; }
-        .header { text-align: center; padding: 20px 0; border-bottom: 2px solid var(--gold); }
-        .logo { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 10px; }
-        h1 { color: var(--gold); font-size: 24px; margin: 5px 0; }
-        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #333; }
-        h2 { color: var(--gold); font-size: 18px; margin-top: 0; border-left: 3px solid var(--gold); padding-left: 10px; }
+        :root { --gold: #D4AF37; --dark: #121212; --card: #1e1e1e; --text: #e0e0e0; --green: #00C851; --red: #ff4444; }
+        body { font-family: 'Roboto', sans-serif; background: var(--dark); color: var(--text); margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: auto; padding: 15px; }
+        .card { background: var(--card); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        h1, h2, h3 { color: var(--gold); margin-top: 0; }
+        h2 { font-size: 18px; border-left: 4px solid var(--gold); padding-left: 10px; }
         
-        /* SEARCH BOX */
-        .search-box { display: flex; gap: 5px; }
-        input { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #444; background: #2c2c2c; color: white; }
-        .btn-search { background: var(--gold); border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        /* JAM & STATUS MARKET */
+        .market-status { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--gold); }
+        #clock { font-weight: bold; font-size: 18px; color: var(--gold); }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .open { background: var(--green); color: white; }
+        .closed { background: var(--red); color: white; }
 
-        /* ARTIKEL AREA */
-        .article-content { font-size: 14px; color: #bbb; line-height: 1.6; }
-        .quote { font-style: italic; color: var(--gold); margin: 10px 0; display: block; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #444; background: #2c2c2c; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: black; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .nav-btn { background: #333; color: var(--gold); border: 1px solid var(--gold); padding: 12px; text-decoration: none; text-align: center; border-radius: 8px; font-size: 11px; display: block; font-weight: bold; }
         
-        button.calc-btn { width: 100%; padding: 12px; background: var(--gold); border: none; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        .page { display: none; padding: 20px; min-height: 100vh; }
+        .active { display: block; }
+        .back-btn { background: none; border: 1px solid var(--gold); color: var(--gold); width: auto; padding: 8px 20px; margin-bottom: 20px; border-radius: 5px; cursor: pointer; }
+        .quote { font-style: italic; color: var(--gold); margin: 10px 0; display: block; border-left: 2px solid #555; padding-left: 10px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <img src="icon.png" class="logo" alt="Logo">
-        <h1>SahamPro by.nurali</h1>
-        <p style="font-size: 12px; color: #888;">Investment Audit & Resilience Protocol</p>
-    </div>
+<div id="main-page" class="page active">
+    <div class="container">
+        <div style="text-align: center; padding: 20px;">
+            <img src="icon.png" style="width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover;">
+            <h1>SAHAMPro <span style="font-size: 12px; color: #888;">by.nurali</span></h1>
+            <p style="font-size: 10px; letter-spacing: 2px; color: #aaa;">INVESTMENT AUDIT & RESILIENCE</p>
+        </div>
 
-    <div class="card">
-        <h2>Cek Berita & Emiten</h2>
-        <form action="https://www.google.com/search" method="get" target="_blank" class="search-box">
-            <input type="text" name="q" placeholder="Cari Kode Saham (contoh: BBRI)..." required>
-            <button type="submit" class="btn-search">CARI</button>
-        </form>
-    </div>
+        <div class="market-status">
+            <div>
+                <div style="font-size: 10px; color: #888;">WAKTU (WIB)</div>
+                <div id="clock">00:00:00</div>
+            </div>
+            <div id="status-badge" class="badge">Checking...</div>
+        </div>
 
-    <div class="card" id="buffett">
-        <h2>Legenda 1: Warren Buffett</h2>
-        <div class="article-content">
-            <span class="quote">"Be fearful when others are greedy, and greedy when others are fearful."</span>
-            <p>Buffett mengajarkan bahwa resiliensi finansial datang dari kesabaran. Beliau tidak membeli saham karena tren, melainkan karena nilai perusahaan (Value Investing). Selama krisis 2008, di saat dunia panik, Buffett justru menyuntikkan dana besar ke perusahaan fundamental kuat seperti Goldman Sachs.</p>
-            <p><strong>Pelajaran Audit:</strong> Selalu cek Laba Bersih dan ROE sebelum memutuskan membeli.</p>
+        <div class="card">
+            <h2>Pusat Data Emiten</h2>
+            <input type="text" id="ticker" placeholder="Masukkan Kode Saham (BBRI, BMRI...)">
+            <button onclick="window.open('https://www.google.com/search?q=laporan+tahunan+saham+' + document.getElementById('ticker').value, '_blank')">CEK LAPORAN KEUANGAN</button>
+        </div>
+
+        <div class="card">
+            <h2>Sejarah Legenda</h2>
+            <div class="nav-grid">
+                <a href="javascript:void(0)" onclick="showPage('page-buffett')" class="nav-btn">WARREN BUFFETT</a>
+                <a href="javascript:void(0)" onclick="showPage('page-lkh')" class="nav-btn">LO KHENG HONG</a>
+                <a href="javascript:void(0)" onclick="showPage('page-graham')" class="nav-btn">BENJAMIN GRAHAM</a>
+                <a href="javascript:void(0)" onclick="showPage('page-munger')" class="nav-btn">CHARLIE MUNGER</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Audit Kriteria LKH</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <input type="number" id="pbv" step="0.01" placeholder="PBV">
+                <input type="number" id="per" step="0.1" placeholder="PER">
+            </div>
+            <button onclick="auditLKH()" style="margin-top: 10px; background: #333; color: var(--gold); border: 1px solid var(--gold);">CEK KELAYAKAN</button>
+            <div id="auditResult" style="margin-top:15px; text-align:center; font-weight:bold;"></div>
         </div>
     </div>
+</div>
 
-    <div class="card" id="lkh">
-        <h2>Legenda 2: Lo Kheng Hong</h2>
-        <div class="article-content">
-            <span class="quote">"Harta karun terbesar ada di pasar modal."</span>
-            <p>LKH membuktikan bahwa investor ritel Indonesia bisa menjadi triliuner. Strategi utamanya adalah "Bad News is Good News". Beliau mencari saham yang dihargai murah (low PBV) namun memiliki aset nyata dan tata kelola yang baik. Beliau adalah penganut setia membaca Laporan Keuangan secara mendalam setiap hari.</p>
-            <p><strong>Pelajaran Audit:</strong> Abaikan rumor, fokuslah pada data riil tahunan.</p>
+<div id="page-buffett" class="page">
+    <div class="container">
+        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
+        <div class="card">
+            <h1>Warren Buffett</h1>
+            <span class="quote">"Price is what you pay. Value is what you get."</span>
+            <p>Investor paling sukses sepanjang masa. Ia memimpin Berkshire Hathaway dan fokus pada investasi jangka panjang di perusahaan yang memiliki keunggulan kompetitif abadi.</p>
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <h2>Kalkulator Compounding</h2>
-        <input type="number" id="modal" placeholder="Modal (Rp)" style="width: 100%; margin-bottom: 10px;">
-        <input type="number" id="bunga" placeholder="Return Per Tahun (%)" style="width: 100%; margin-bottom: 10px;">
-        <input type="number" id="tahun" placeholder="Durasi (Tahun)" style="width: 100%; margin-bottom: 10px;">
-        <button class="calc-btn" onclick="hitung()">HITUNG POTENSI</button>
-        <p id="hasil" style="margin-top: 15px; color: var(--gold); font-weight: bold;"></p>
+<div id="page-lkh" class="page">
+    <div class="container">
+        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
+        <div class="card">
+            <h1>Lo Kheng Hong</h1>
+            <span class="quote">"Harta karun terbesar di dunia ada di pasar modal."</span>
+            <p>Triliuner saham Indonesia yang hidup santai (Financial Freedom) berkat disiplin membaca laporan keuangan dan membeli saham salah harga.</p>
+        </div>
+    </div>
+</div>
+
+<div id="page-graham" class="page">
+    <div class="container">
+        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
+        <div class="card">
+            <h1>Benjamin Graham</h1>
+            <p style="color: var(--gold);"><i>The Father of Value Investing</i></p>
+            <span class="quote">"Buy when the market is pessimistic, sell when it's optimistic."</span>
+            <hr border="1" color="#333">
+            <p>Guru dari Warren Buffett dan penulis buku legendaris "The Intelligent Investor". Graham mengajarkan konsep **Margin of Safety** (Batas Aman).</p>
+            <h3>Prinsip Utama:</h3>
+            <ul>
+                <li>Bedakan antara Investasi dan Spekulasi.</li>
+                <li>Gunakan angka riil (Aset & Laba) sebagai panduan, bukan perasaan.</li>
+                <li>Mr. Market adalah pelayan Anda, bukan penasihat Anda.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="page-munger" class="page">
+    <div class="container">
+        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
+        <div class="card">
+            <h1>Charlie Munger</h1>
+            <p style="color: var(--gold);"><i>The Architect of Berkshire Hathaway</i></p>
+            <span class="quote">"The big money is not in the buying and the selling, but in the waiting."</span>
+            <hr border="1" color="#333">
+            <p>Sahabat setia Buffett yang merubah strategi Buffett dari membeli "perusahaan murah" menjadi membeli "perusahaan hebat di harga wajar".</p>
+            <h3>Prinsip Utama:</h3>
+            <ul>
+                <li>Terus belajar dan memiliki banyak model mental.</li>
+                <li>Hindari kesalahan bodoh daripada berusaha menjadi sangat pintar.</li>
+                <li>Disiplin tinggi untuk tidak melakukan apa-apa saat tidak ada peluang bagus.</li>
+            </ul>
+        </div>
     </div>
 </div>
 
 <script>
-    function hitung() {
-        let p = document.getElementById('modal').value;
-        let r = document.getElementById('bunga').value / 100;
-        let t = document.getElementById('tahun').value;
-        if(p && r && t) {
-            let res = p * Math.pow((1 + r), t);
-            document.getElementById('hasil').innerHTML = "Estimasi Hasil: Rp " + Math.round(res).toLocaleString('id-ID');
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function updateClock() {
+        const now = new Date();
+        const hrs = now.getHours();
+        const mins = now.getMinutes();
+        const day = now.getDay();
+        const timeStr = now.toLocaleTimeString('id-ID');
+        document.getElementById('clock').innerText = timeStr;
+
+        const badge = document.getElementById('status-badge');
+        if (day >= 1 && day <= 5) {
+            if ((hrs == 9 && mins >= 0) || (hrs > 9 && hrs < 16)) {
+                badge.innerText = "MARKET OPEN";
+                badge.className = "badge open";
+            } else {
+                badge.innerText = "MARKET CLOSED";
+                badge.className = "badge closed";
+            }
+        } else {
+            badge.innerText = "MARKET CLOSED (WEEKEND)";
+            badge.className = "badge closed";
+        }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function auditLKH() {
+        let pbv = document.getElementById('pbv').value;
+        let per = document.getElementById('per').value;
+        let res = document.getElementById('auditResult');
+        if(pbv > 0 && pbv < 1 && per < 10) {
+            res.style.color = "var(--green)";
+            res.innerText = "✓ SANGAT LAYAK (Kriteria LKH)";
+        } else {
+            res.style.color = "var(--red)";
+            res.innerText = "✗ KURANG IDEAL / MAHAL";
         }
     }
 </script>
-
 </body>
 </html>

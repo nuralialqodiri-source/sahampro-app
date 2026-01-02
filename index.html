@@ -3,128 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SahamPro by.nurali - Protokol Resiliensi</title>
+    <title>SahamPro by.nurali</title>
     
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#D4AF37">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* TEMA DARK GARANG */
         :root {
             --gold: #D4AF37;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
-            --text-light: #e0e0e0;
-            --red-chart: #ff4444;
-            --green-chart: #00C851;
+            --text: #e0e0e0;
         }
-        body { font-family: 'Roboto', sans-serif; background-color: var(--dark-bg); color: var(--text-light); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: auto; }
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 20px; }
-        .logo-img { width: 120px; height: 120px; margin-bottom: 10px; border-radius: 50%; border: 3px solid var(--gold); }
-        h1 { color: var(--gold); margin: 10px 0; text-transform: uppercase; letter-spacing: 1px; }
-        .tagline { font-style: italic; color: #a0a0a0; }
-        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin-bottom: 25px; border: 1px solid #333; }
-        h2 { color: var(--gold); border-left: 4px solid var(--gold); padding-left: 10px; margin-top: 0; }
-        label { display: block; margin-bottom: 8px; font-weight: 500; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444; border-radius: 8px; background-color: #2c2c2c; color: var(--text-light); box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--gold), #b88a00); color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
-        button:active { transform: scale(0.98); }
-        #result { margin-top: 20px; font-weight: bold; text-align: center; color: var(--gold); font-size: 1.2em; }
-        .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .nav-links a { flex: 1; text-align: center; padding: 12px; background-color: #2c2c2c; color: var(--gold); text-decoration: none; border-radius: 8px; border: 1px solid var(--gold); transition: all 0.3s; }
-        .nav-links a:hover { background-color: var(--gold); color: #000; }
+        body { font-family: 'Roboto', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; padding: 15px; }
+        .container { max-width: 600px; margin: auto; }
+        .header { text-align: center; padding: 20px 0; border-bottom: 2px solid var(--gold); }
+        .logo { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 10px; }
+        h1 { color: var(--gold); font-size: 24px; margin: 5px 0; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #333; }
+        h2 { color: var(--gold); font-size: 18px; margin-top: 0; border-left: 3px solid var(--gold); padding-left: 10px; }
         
-        /* CSS untuk Google Search */
-        .search-box { display: flex; gap: 10px; }
-        .search-box input { margin-bottom: 0; }
-        .search-btn { width: auto; padding: 12px 20px; background: var(--gold); color: black; }
+        /* SEARCH BOX */
+        .search-box { display: flex; gap: 5px; }
+        input { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #444; background: #2c2c2c; color: white; }
+        .btn-search { background: var(--gold); border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+        /* ARTIKEL AREA */
+        .article-content { font-size: 14px; color: #bbb; line-height: 1.6; }
+        .quote { font-style: italic; color: var(--gold); margin: 10px 0; display: block; }
+        
+        button.calc-btn { width: 100%; padding: 12px; background: var(--gold); border: none; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="icon.png" alt="SahamPro Logo" class="logo-img">
-            <h1>SahamPro by.nurali</h1>
-            <p class="tagline">"Protokol Resiliensi: Bertahan & Bertumbuh di Segala Musim"</p>
-        </div>
 
-        <div class="card">
-            <h2>Cek Berita Emiten (Google)</h2>
-            <p>Masukkan kode emiten untuk mencari berita terkini.</p>
-            <form action="https://www.google.com/search" method="get" target="_blank" class="search-box">
-                <input type="text" name="q" placeholder="Contoh: BBCA, TLKM, IHSG..." required>
-                <button type="submit" class="search-btn">🔍 Cari</button>
-            </form>
-        </div>
+<div class="container">
+    <div class="header">
+        <img src="icon.png" class="logo" alt="Logo">
+        <h1>SahamPro by.nurali</h1>
+        <p style="font-size: 12px; color: #888;">Investment Audit & Resilience Protocol</p>
+    </div>
 
-        <div class="card">
-            <h2>Kalkulator "The Magic Compounding"</h2>
-            <label for="modalAwal">Modal Awal (Rp):</label>
-            <input type="number" id="modalAwal" placeholder="Contoh: 10000000">
-            <label for="returnTahunan">Estimasi Return Tahunan (%):</label>
-            <input type="number" id="returnTahunan" placeholder="Contoh: 15 (Konservatif)">
-            <label for="jangkaWaktu">Jangka Waktu (Tahun):</label>
-            <input type="number" id="jangkaWaktu" placeholder="Contoh: 10">
-            <button onclick="hitungCompound()">Hitung Potensi Masa Depan</button>
-            <div id="result"></div>
-        </div>
+    <div class="card">
+        <h2>Cek Berita & Emiten</h2>
+        <form action="https://www.google.com/search" method="get" target="_blank" class="search-box">
+            <input type="text" name="q" placeholder="Cari Kode Saham (contoh: BBRI)..." required>
+            <button type="submit" class="btn-search">CARI</button>
+        </form>
+    </div>
 
-        <div class="card" id="warren-buffett">
-            <h2>Kisah Legenda: Warren Buffett</h2>
-            <p><em>"Pasar saham adalah alat untuk mentransfer uang dari yang tidak sabar kepada yang sabar."</em></p>
-            <hr style="border-color: #444;">
-            <h3>Pelajaran Resiliensi:</h3>
-            <p>[Di sini akan ditampilkan artikel lengkap tentang strategi Warren Buffett bertahan saat krisis, bagaimana dia membeli saat orang lain takut, dan kekuatan fokus jangka panjangnya...]</p>
-        </div>
-
-        <div class="card" id="lo-kheng-hong">
-            <h2>Kisah Legenda: Lo Kheng Hong</h2>
-            <p><em>"Harta karun terbesar di dunia ada di pasar modal, bukan di dasar laut."</em></p>
-            <hr style="border-color: #444;">
-            <h3>Pelajaran Resiliensi:</h3>
-            <p>[Di sini akan ditampilkan artikel lengkap tentang bagaimana LKH hidup sederhana, disiplin membaca laporan keuangan, dan berani memegang saham fundamental bagus meski harganya sedang jatuh...]</p>
-        </div>
-
-        <div class="card">
-            <h2>Navigasi Cepat</h2>
-            <div class="nav-links">
-                <a href="#warren-buffett">📜 Baca Buffett</a>
-                <a href="#lo-kheng-hong">📜 Baca LKH</a>
-            </div>
+    <div class="card" id="buffett">
+        <h2>Legenda 1: Warren Buffett</h2>
+        <div class="article-content">
+            <span class="quote">"Be fearful when others are greedy, and greedy when others are fearful."</span>
+            <p>Buffett mengajarkan bahwa resiliensi finansial datang dari kesabaran. Beliau tidak membeli saham karena tren, melainkan karena nilai perusahaan (Value Investing). Selama krisis 2008, di saat dunia panik, Buffett justru menyuntikkan dana besar ke perusahaan fundamental kuat seperti Goldman Sachs.</p>
+            <p><strong>Pelajaran Audit:</strong> Selalu cek Laba Bersih dan ROE sebelum memutuskan membeli.</p>
         </div>
     </div>
 
-    <script>
-        // Script Kalkulator
-        function hitungCompound() {
-            let P = parseFloat(document.getElementById('modalAwal').value);
-            let r = parseFloat(document.getElementById('returnTahunan').value) / 100;
-            let t = parseFloat(document.getElementById('jangkaWaktu').value);
-            
-            if (isNaN(P) || isNaN(r) || isNaN(t)) {
-                document.getElementById('result').innerHTML = "Mohon isi semua data dengan angka yang benar.";
-                return;
-            }
-            
-            let A = P * Math.pow((1 + r), t);
-            let profit = A - P;
-            
-            document.getElementById('result').innerHTML = 
-                `Estimasi Total Dana Tahun ke-${t}:<br>Rp ${A.toLocaleString('id-ID', {maximumFractionDigits:0})}<br><br>` +
-                `Total Profit (Bunga Berbunga):<br>Rp ${profit.toLocaleString('id-ID', {maximumFractionDigits:0})}`;
-        }
+    <div class="card" id="lkh">
+        <h2>Legenda 2: Lo Kheng Hong</h2>
+        <div class="article-content">
+            <span class="quote">"Harta karun terbesar ada di pasar modal."</span>
+            <p>LKH membuktikan bahwa investor ritel Indonesia bisa menjadi triliuner. Strategi utamanya adalah "Bad News is Good News". Beliau mencari saham yang dihargai murah (low PBV) namun memiliki aset nyata dan tata kelola yang baik. Beliau adalah penganut setia membaca Laporan Keuangan secara mendalam setiap hari.</p>
+            <p><strong>Pelajaran Audit:</strong> Abaikan rumor, fokuslah pada data riil tahunan.</p>
+        </div>
+    </div>
 
-        // Script untuk PWA (Agar bisa diinstal)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Kita menggunakan service worker kosong standar agar syarat PWA terpenuhi
-                navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdZZXRNoJywgZXZlbnQgPT4geyBldmVudC5yZXNwb25kV2l0aChmZXRjaChldmVudC5yZXF1ZXN0KSk7IH0pOw==')
-                    .then(registration => console.log('Service Worker registered'))
-                    .catch(err => console.log('Service Worker registration failed', err));
-            });
+    <div class="card">
+        <h2>Kalkulator Compounding</h2>
+        <input type="number" id="modal" placeholder="Modal (Rp)" style="width: 100%; margin-bottom: 10px;">
+        <input type="number" id="bunga" placeholder="Return Per Tahun (%)" style="width: 100%; margin-bottom: 10px;">
+        <input type="number" id="tahun" placeholder="Durasi (Tahun)" style="width: 100%; margin-bottom: 10px;">
+        <button class="calc-btn" onclick="hitung()">HITUNG POTENSI</button>
+        <p id="hasil" style="margin-top: 15px; color: var(--gold); font-weight: bold;"></p>
+    </div>
+</div>
+
+<script>
+    function hitung() {
+        let p = document.getElementById('modal').value;
+        let r = document.getElementById('bunga').value / 100;
+        let t = document.getElementById('tahun').value;
+        if(p && r && t) {
+            let res = p * Math.pow((1 + r), t);
+            document.getElementById('hasil').innerHTML = "Estimasi Hasil: Rp " + Math.round(res).toLocaleString('id-ID');
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>

@@ -2,167 +2,165 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SahamPro by.nurali</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#D4AF37">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sahampro by.N v20.9</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22red%22/><text y=%22.65em%22 font-size=%2270%22 fill=%22white%22 x=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22>N</text></svg>">
+
     <style>
-        :root { --gold: #D4AF37; --dark: #121212; --card: #1e1e1e; --text: #e0e0e0; --green: #00C851; --red: #ff4444; }
-        body { font-family: 'Roboto', sans-serif; background: var(--dark); color: var(--text); margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: auto; padding: 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        h1, h2, h3 { color: var(--gold); margin-top: 0; }
-        h2 { font-size: 18px; border-left: 4px solid var(--gold); padding-left: 10px; margin-bottom: 15px; }
+        :root { --red: #ff0000; --bg: #000; --card: #0a0a0a; --text: #fff; --green: #00ff00; --gray: #888; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
         
-        .market-status { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #333; }
-        #clock { font-weight: bold; font-size: 18px; color: var(--gold); }
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-        .open { background: var(--green); color: white; }
-        .closed { background: var(--red); color: white; }
+        .header { background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); padding: 15px; border-bottom: 1px solid #222; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .brand-text { font-size: 11px; color: var(--red); font-weight: bold; letter-spacing: 1px; }
+        .balance { font-size: 26px; font-weight: 900; color: #fff; margin-top: 5px; }
 
-        input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #444; background: #2c2c2c; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: var(--gold); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: black; transition: 0.3s; }
-        button:hover { opacity: 0.8; }
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .nav-btn { background: #2c2c2c; color: var(--gold); border: 1px solid var(--gold); padding: 12px; text-decoration: none; text-align: center; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .content { padding: 15px; padding-bottom: 90px; max-width: 500px; margin: auto; }
+        .page { display: none; } .page.active { display: block; }
+        .card { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 10px; border: 1px solid #1a1a1a; }
         
-        .page { display: none; padding: 20px; min-height: 100vh; }
-        .active { display: block; }
-        .back-btn { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; margin-bottom: 20px; border-radius: 5px; cursor: pointer; }
+        /* Navigasi Transparan 60px */
+        .nav-container { position: fixed; bottom: 0; width: 100%; background: transparent; backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1); display: flex; height: 60px; z-index: 1000; }
+        .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray); font-size: 10px; font-weight: bold; cursor: pointer; }
+        .nav-btn.active { color: var(--red); border-top: 2px solid var(--red); background: rgba(255,0,0,0.05); }
 
-        .v-box { background: #222; border: 1px solid var(--gold); padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
-        .v-amt { font-size: 24px; color: var(--green); font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
-        th { color: var(--gold); text-align: left; padding: 8px; border-bottom: 1px solid #444; }
-        td { padding: 8px; border-bottom: 1px solid #333; }
+        #reader { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:2000; padding:25px; overflow-y:auto; }
+        .btn { width:100%; padding:18px; border:none; border-radius:8px; font-weight:900; color:#fff; cursor:pointer; }
     </style>
 </head>
 <body>
 
-<div id="main-page" class="page active">
-    <div class="container">
-        <div style="text-align: center; padding: 10px;">
-            <img src="icon.png" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 10px; object-fit: cover;">
-            <h1>SAHAMPro</h1>
-        </div>
-
-        <div class="market-status">
-            <div><div style="font-size: 10px; color: #888;">WAKTU (WIB)</div><div id="clock">00:00:00</div></div>
-            <div id="status-badge" class="badge">Checking...</div>
-        </div>
-
-        <div class="nav-grid" style="margin-bottom: 20px;">
-            <button onclick="showPage('page-virtual')" style="background: var(--gold); color: black;">SIMULASI INVESTASI</button>
-            <button onclick="showPage('page-broker')" style="background: #333; color: var(--gold); border: 1px solid var(--gold);">MENU SEKURITAS</button>
-        </div>
-
-        <div class="card">
-            <h2>Audit Kriteria LKH</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <input type="number" id="pbv" step="0.01" placeholder="PBV">
-                <input type="number" id="per" step="0.1" placeholder="PER">
-            </div>
-            <button onclick="auditLKH()" style="margin-top:10px;">CEK KELAYAKAN</button>
-            <div id="auditRes" style="margin-top:15px; text-align:center; font-weight:bold;"></div>
-        </div>
-
-        <div class="card">
-            <h2>Sejarah & Riset</h2>
-            <div class="nav-grid">
-                <button onclick="showPage('page-legends')" class="nav-btn">LEGENDA SAHAM</button>
-                <button onclick="window.open('https://www.google.com/search?q=laporan+keuangan+saham', '_blank')" class="nav-btn">LAPORAN KEUANGAN</button>
-            </div>
-        </div>
+<div id="disclaimerOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:9999; display:flex; align-items:center; padding:25px;">
+    <div style="text-align:center; width:100%;">
+        <div style="width:70px; height:70px; background:red; border-radius:15px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:40px; color:white;">N</div>
+        <h2 style="color:red">SIMULATOR EDUKASI</h2>
+        <p style="font-size:14px; margin:15px 0; color:#ccc; line-height:1.5;">Sahampro by.N adalah platform simulasi audit dan investasi pribadi. Seluruh data harga dan saldo adalah virtual.</p>
+        <button onclick="document.getElementById('disclaimerOverlay').style.display='none'" style="background:red; color:white; padding:15px 40px; border:none; border-radius:8px; font-weight:bold; width:100%;">MULAI ANALISIS</button>
     </div>
 </div>
 
-<div id="page-virtual" class="page">
-    <div class="container">
-        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <h2>Investasi Virtual</h2>
-        <div class="v-box"><div style="font-size: 11px; color: #888;">SALDO</div><div id="v-bal" class="v-amt">Rp 100.000.000</div></div>
-        <div class="card">
-            <input type="text" id="vt" placeholder="Kode Saham">
-            <input type="number" id="vp" placeholder="Harga">
-            <input type="number" id="vl" placeholder="Lot">
-            <button onclick="vBuy()">BELI SEKARANG</button>
-        </div>
-        <div class="card">
-            <table><thead><tr><th>SAHAM</th><th>LOT</th><th>TOTAL</th></tr></thead><tbody id="v-body"></tbody></table>
-        </div>
-    </div>
+<div class="header">
+    <div class="brand-text">Sahampro by.N v20.9</div>
+    <div id="dispEquity" class="balance">Rp 4.202.013.060</div>
 </div>
 
-<div id="page-broker" class="page">
-    <div class="container">
-        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <h2>Market & Broker</h2>
-        <p style="font-size: 12px; color: #888; margin-bottom: 15px;">Akses cepat ke platform sekuritas terkemuka:</p>
-        <div class="nav-grid">
-            <button onclick="window.open('https://indopremier.com/ipotstock/', '_blank')" class="nav-btn">IPOT (Indo Premier)</button>
-            <button onclick="window.open('https://www.miraeasset.co.id/', '_blank')" class="nav-btn">MIRAE ASSET</button>
-            <button onclick="window.open('https://stockbit.com/', '_blank')" class="nav-btn">STOCKBIT</button>
-            <button onclick="window.open('https://www.mandirisakuritas.co.id/', '_blank')" class="nav-btn">MOIN (Mandiri)</button>
-            <button onclick="window.open('https://www.bni-am.co.id/', '_blank')" class="nav-btn">BNI SEKURITAS</button>
-            <button onclick="window.open('https://www.ajaib.co.id/', '_blank')" class="nav-btn">AJAIB</button>
+<div class="content">
+    <div id="p-mkt" class="page active"><h3>📊 LIVE MARKET</h3><div id="mktList"></div></div>
+    <div id="p-ord" class="page">
+        <h3 id="ordSym">TERMINAL ORDER</h3>
+        <div class="card">
+            <div id="chartBox" style="height:250px; background:#000; border-radius:8px; overflow:hidden; margin-bottom:10px;"></div>
+            <input type="number" id="qty" value="1" style="width:100%; padding:15px; background:#111; color:#fff; border:1px solid #333; text-align:center; margin-bottom:10px; border-radius:8px;">
+            <button class="btn" style="background:var(--green); color:#000; margin-bottom:10px" onclick="trade('BUY')">CONFIRM BUY</button>
+            <button class="btn" style="background:var(--red)" onclick="trade('SELL')">CLOSE POSITION</button>
         </div>
     </div>
+    <div id="p-ptf" class="page"><h3>💼 PORTOFOLIO</h3><div id="ptfList"></div></div>
+    <div id="p-lib" class="page"><h3>📖 PERPUSTAKAAN AUDIT</h3><div id="libList"></div></div>
 </div>
 
-<div id="page-legends" class="page">
-    <div class="container">
-        <button class="back-btn" onclick="showPage('main-page')">← KEMBALI</button>
-        <h2>Legenda Investasi</h2>
-        <div class="nav-grid">
-            <button onclick="alert('Buffett: Fokus pada kualitas.')" class="nav-btn">WARREN BUFFETT</button>
-            <button onclick="alert('LKH: Tidur adalah cara kaya.')" class="nav-btn">LO KHENG HONG</button>
-            <button onclick="alert('Graham: Cari harga murah.')" class="nav-btn">BEN GRAHAM</button>
-            <button onclick="alert('Munger: Berpikir rasional.')" class="nav-btn">CHARLIE MUNGER</button>
-        </div>
-    </div>
+<div id="reader">
+    <button onclick="document.getElementById('reader').style.display='none'" style="background:red; color:white; padding:10px 20px; border:none; float:right; border-radius:8px;">TUTUP</button>
+    <h2 id="rTitle" style="margin-top:45px; color:red"></h2><hr style="border:1px solid #222; margin:15px 0">
+    <div id="rBody" style="line-height:1.8; color:#eee; text-align:justify; white-space: pre-wrap; padding-bottom:50px;"></div>
+</div>
+
+<div class="nav-container">
+    <div class="nav-btn active" onclick="tab('p-mkt',this)"><span>📊</span>Pasar</div>
+    <div class="nav-btn" onclick="tab('p-ord',this)"><span>⚡</span>Order</div>
+    <div class="nav-btn" onclick="tab('p-ptf',this)"><span>💼</span>Porto</div>
+    <div class="nav-btn" onclick="tab('p-lib',this)"><span>📖</span>Audit</div>
 </div>
 
 <script>
-    let bal = 100000000;
-    function showPage(id) {
+    let cash = 4202013060;
+    let porto = [];
+    let assets = [
+        {s:'BMRI', n:'Bank Mandiri', p:7250, tv:'IDX:BMRI', fx:false},
+        {s:'BBRI', n:'Bank Rakyat Indonesia', p:4850, tv:'IDX:BBRI', fx:false},
+        {s:'TLKM', n:'Telkom Indonesia', p:3950, tv:'IDX:TLKM', fx:false},
+        {s:'AMRT', n:'Sumber Alfaria Trijaya', p:3100, tv:'IDX:AMRT', fx:false},
+        {s:'ICBP', n:'Indofood CBP', p:11850, tv:'IDX:ICBP', fx:false},
+        {s:'GOLD', n:'Emas Dunia', p:2150.75, tv:'OANDA:XAUUSD', fx:true},
+        {s:'EURUSD', n:'Euro / Dollar', p:1.0920, tv:'FX:EURUSD', fx:true},
+        {s:'USDJPY', n:'Dollar / Yen', p:151.45, tv:'FX:USDJPY', fx:true},
+        {s:'BTC', n:'Bitcoin', p:68500.50, tv:'BINANCE:BTCUSDT', fx:true}
+    ];
+
+    setInterval(() => {
+        let totalPL = 0;
+        assets.forEach(a => { a.p += (Math.random() - 0.5) * (a.p * 0.0008); });
+        porto.forEach(item => {
+            let live = assets.find(a => a.s === item.s).p;
+            let mult = item.isFx ? 16000 : 100;
+            item.pl = (live - item.buy) * item.q * mult;
+            totalPL += item.pl;
+        });
+        document.getElementById('dispEquity').innerText = "Rp " + Math.round(cash + totalPL).toLocaleString();
+        renderMkt(); renderPtf();
+    }, 1000);
+
+    function renderMkt() {
+        let h = '';
+        assets.forEach(a => {
+            h += `<div class="card" onclick="openOrd('${a.s}')"><div style="display:flex; justify-content:space-between"><div><b>${a.s}</b><br><small style="color:gray">${a.n}</small></div><b style="color:lime">${a.p.toLocaleString(undefined,{minimumFractionDigits: a.fx?2:0})}</b></div></div>`;
+        });
+        document.getElementById('mktList').innerHTML = h;
+    }
+
+    function renderPtf() {
+        let h = '';
+        porto.forEach((i) => {
+            let cl = i.pl >= 0 ? 'lime' : 'red';
+            h += `<div class="card"><div style="display:flex; justify-content:space-between"><b>${i.s}</b><span style="color:${cl}">Rp ${Math.round(i.pl).toLocaleString()}</span></div><small style="color:gray">Avg: ${i.buy.toLocaleString()} | Qty: ${i.q}</small></div>`;
+        });
+        document.getElementById('ptfList').innerHTML = h || '<p style="text-align:center; padding:20px; color:gray">No active positions.</p>';
+    }
+
+    function openOrd(s) {
+        window.curS = s;
+        document.getElementById('ordSym').innerText = "TERMINAL " + s;
+        let tv = assets.find(a => a.s === s).tv;
+        document.getElementById('chartBox').innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${tv}&theme=dark" style="width:100%;height:100%;border:none;"></iframe>`;
+        tab('p-ord', document.querySelectorAll('.nav-btn')[1]);
+    }
+
+    function trade(type) {
+        if(!window.curS) return;
+        let a = assets.find(x => x.s === window.curS);
+        let q = parseInt(document.getElementById('qty').value);
+        if(type === 'BUY') {
+            porto.push({s:window.curS, q:q, buy:a.p, pl:0, isFx:a.fx}); alert("POSISI DIBUKA");
+        } else {
+            let i = porto.findIndex(x => x.s === window.curS);
+            if(i > -1) { cash += porto[i].pl; porto.splice(i,1); alert("POSISI DITUTUP"); }
+        }
+    }
+
+    function tab(id, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        window.scrollTo(0,0);
-    }
-    function updateClock() {
-        const now = new Date(); const hrs = now.getHours(); const day = now.getDay();
-        document.getElementById('clock').innerText = now.toLocaleTimeString('id-ID');
-        const badge = document.getElementById('status-badge');
-        if (day >= 1 && day <= 5 && hrs >= 9 && hrs < 16) {
-            badge.innerText = "MARKET OPEN"; badge.className = "badge open";
-        } else {
-            badge.innerText = "MARKET CLOSED"; badge.className = "badge closed";
-        }
-    }
-    setInterval(updateClock, 1000); updateClock();
-
-    function vBuy() {
-        let t = document.getElementById('vt').value.toUpperCase(), p = document.getElementById('vp').value, l = document.getElementById('vl').value;
-        if(t && p && l) {
-            let cost = p * l * 100;
-            if(cost > bal) return alert("Saldo tidak cukup!");
-            bal -= cost;
-            document.getElementById('v-bal').innerText = "Rp " + bal.toLocaleString('id-ID');
-            document.getElementById('v-body').innerHTML += `<tr><td>${t}</td><td>${l}</td><td>Rp ${cost.toLocaleString('id-ID')}</td></tr>`;
-            document.getElementById('vt').value = ""; document.getElementById('vp').value = ""; document.getElementById('vl').value = "";
-        }
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
     }
 
-    function auditLKH() {
-        let pbv = document.getElementById('pbv').value, per = document.getElementById('per').value, res = document.getElementById('auditRes');
-        if(pbv > 0 && pbv < 1 && per < 10) {
-            res.style.color = "var(--green)"; res.innerText = "✓ SANGAT LAYAK INVESTASI";
-        } else {
-            res.style.color = "var(--red)"; res.innerText = "✗ TIDAK IDEAL / MAHAL";
-        }
+    const libs = [
+        {t: "Audit Investasi 5 Menit", c: "1. Revenue Growth: Pendapatan harus naik minimal 10% secara tahunan.\n2. NPM (Net Profit Margin): Laba bersih terhadap pendapatan harus stabil.\n3. Arus Kas Operasi: Wajib positif dan menutupi laba bersih.\n4. DER (Debt to Equity): Rasio utang harus sehat (di bawah 1 untuk non-bank)."},
+        {t: "Protokol Black Swan", c: "Tindakan saat krisis:\n- Pantau GDP Indonesia (Alert jika < 4%).\n- Amankan aset ke sektor defensif (ICBP/GOLD).\n- Jangan panik selama fundamental perusahaan tetap kuat menurut audit 5 menit."},
+        {t: "Audit Sektor Perbankan (BMRI/BBRI)", c: "Khusus Bank:\n- NIM (Net Interest Margin): Target di atas 5%.\n- NPL (Non-Performing Loan): Wajib di bawah 3%.\n- LDR: Cek likuiditas bank dalam menyalurkan kredit."}
+    ];
+
+    let lH = '';
+    libs.forEach((l, i) => { lH += `<div class="card" onclick="openLib(${i})"><b>${l.t}</b></div>`; });
+    document.getElementById('libList').innerHTML = lH;
+    function openLib(i) { 
+        document.getElementById('rTitle').innerText = libs[i].t; 
+        document.getElementById('rBody').innerText = libs[i].c; 
+        document.getElementById('reader').style.display='block'; 
     }
+    renderMkt();
 </script>
 </body>
 </html>
+                        

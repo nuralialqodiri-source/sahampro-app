@@ -3,108 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sahampro by.N v20.9</title>
+    <title>Sahampro by.N v21.6 - Ultimate Edition</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22red%22/><text y=%22.65em%22 font-size=%2270%22 fill=%22white%22 x=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Arial%22 font-weight=%22bold%22>N</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%%22 y1=%220%%22 x2=%22100%%22 y2=%22100%%22><stop offset=%220%%22 style=%22stop-color:%23330000;stop-opacity:1%22 /><stop offset=%22100%%22 style=%22stop-color:%23ff0000;stop-opacity:1%22 /></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23000%22/><path d=%22M20 70 L40 40 L60 60 L85 20%22 fill=%22none%22 stroke=%22url(%23g)%22 stroke-width=%2212%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 
     <style>
-        :root { --red: #ff0000; --bg: #000; --card: #0a0a0a; --text: #fff; --green: #00ff00; --gray: #888; }
+        :root { --red: #ff0000; --bg: #000; --card: #111; --text: #fff; --green: #00ff00; --gray: #888; --nav-bg: #151515; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; overflow-x: hidden; }
         
-        .header { background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); padding: 15px; border-bottom: 1px solid #222; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        .brand-text { font-size: 11px; color: var(--red); font-weight: bold; letter-spacing: 1px; }
-        .balance { font-size: 26px; font-weight: 900; color: #fff; margin-top: 5px; }
+        /* HEADER BRANDING Sahampro by.N */
+        .header { background: #000; padding: 20px; border-bottom: 2px solid var(--red); text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .brand-text { font-size: 12px; color: var(--red); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
+        .balance { font-size: 28px; font-weight: 900; color: #fff; margin-top: 5px; }
 
-        .content { padding: 15px; padding-bottom: 90px; max-width: 500px; margin: auto; }
+        .content { padding: 15px; padding-bottom: 110px; max-width: 600px; margin: auto; }
         .page { display: none; } .page.active { display: block; }
-        .card { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 10px; border: 1px solid #1a1a1a; }
         
-        /* Navigasi Transparan 60px */
-        .nav-container { position: fixed; bottom: 0; width: 100%; background: transparent; backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1); display: flex; height: 60px; z-index: 1000; }
-        .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray); font-size: 10px; font-weight: bold; cursor: pointer; }
-        .nav-btn.active { color: var(--red); border-top: 2px solid var(--red); background: rgba(255,0,0,0.05); }
+        /* UI CARD */
+        .card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 12px; border: 1px solid #222; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .card:active { background: #1a0000; }
+        
+        /* NAVIGASI MONOKROM & SOLID */
+        .nav-container { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); border-top: 2px solid #222; display: flex; height: 75px; z-index: 1000; }
+        .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray); cursor: pointer; }
+        .nav-btn span { font-size: 24px; filter: grayscale(100%) brightness(70%); margin-bottom: 4px; transition: 0.3s; }
+        .nav-btn b { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-btn.active { color: var(--red); background: #1a0000; }
+        .nav-btn.active span { filter: grayscale(0%) brightness(100%); }
 
-        #reader { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:2000; padding:25px; overflow-y:auto; }
-        .btn { width:100%; padding:18px; border:none; border-radius:8px; font-weight:900; color:#fff; cursor:pointer; }
+        /* READER & CHART BOX */
+        #reader { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:2000; padding:30px; overflow-y:auto; }
+        .btn { width:100%; padding:18px; border:none; border-radius:12px; font-weight:900; font-size:16px; color:#fff; cursor:pointer; }
+        #chartBox { height:350px; background:#000; border-radius:12px; overflow:hidden; margin-bottom:15px; border:1px solid #333; }
     </style>
 </head>
 <body>
 
-<div id="disclaimerOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:9999; display:flex; align-items:center; padding:25px;">
-    <div style="text-align:center; width:100%;">
-        <div style="width:70px; height:70px; background:red; border-radius:15px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:40px; color:white;">N</div>
-        <h2 style="color:red">SIMULATOR EDUKASI</h2>
-        <p style="font-size:14px; margin:15px 0; color:#ccc; line-height:1.5;">Sahampro by.N adalah platform simulasi audit dan investasi pribadi. Seluruh data harga dan saldo adalah virtual.</p>
-        <button onclick="document.getElementById('disclaimerOverlay').style.display='none'" style="background:red; color:white; padding:15px 40px; border:none; border-radius:8px; font-weight:bold; width:100%;">MULAI ANALISIS</button>
+<div id="splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center; text-align:center; padding:30px;">
+    <div>
+        <svg width="100" height="100" viewBox="0 0 100 100" style="margin-bottom:20px;">
+            <rect width="100" height="100" rx="20" fill="#111"/>
+            <path d="M20 70 L40 40 L60 60 L85 20" fill="none" stroke="red" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2 style="color:var(--red); letter-spacing:3px; margin-bottom:10px;">Sahampro by.N</h2>
+        <p style="color:#666; font-size:14px; margin-bottom:30px;">Investment Audit & Market Intelligence</p>
+        <button onclick="document.getElementById('splash').style.display='none'" style="background:var(--red); color:white; padding:18px 40px; border:none; border-radius:12px; font-weight:bold; cursor:pointer;">START AUDIT</button>
     </div>
 </div>
 
 <div class="header">
-    <div class="brand-text">Sahampro by.N v20.9</div>
+    <div class="brand-text">Sahampro by.N v21.6</div>
     <div id="dispEquity" class="balance">Rp 4.202.013.060</div>
 </div>
 
 <div class="content">
-    <div id="p-mkt" class="page active"><h3>📊 LIVE MARKET</h3><div id="mktList"></div></div>
+    <div id="p-mkt" class="page active">
+        <h3 style="margin-bottom:15px; font-size:14px; color:var(--gray); letter-spacing:1px;">MARKET REAL-TIME</h3>
+        <div id="mktList"></div>
+    </div>
+    
     <div id="p-ord" class="page">
-        <h3 id="ordSym">TERMINAL ORDER</h3>
-        <div class="card">
-            <div id="chartBox" style="height:250px; background:#000; border-radius:8px; overflow:hidden; margin-bottom:10px;"></div>
-            <input type="number" id="qty" value="1" style="width:100%; padding:15px; background:#111; color:#fff; border:1px solid #333; text-align:center; margin-bottom:10px; border-radius:8px;">
-            <button class="btn" style="background:var(--green); color:#000; margin-bottom:10px" onclick="trade('BUY')">CONFIRM BUY</button>
+        <h3 id="ordSym">AUDIT TERMINAL</h3>
+        <div style="background:var(--card); padding:20px; border-radius:15px; border:1px solid #222; margin-top:15px;">
+            <div id="chartBox"></div> <label style="color:var(--gray); font-size:12px;">QTY AUDIT</label>
+            <input type="number" id="qty" value="1" style="width:100%; padding:18px; background:#000; color:#fff; border:1px solid #444; text-align:center; margin:10px 0 15px 0; border-radius:10px; font-size:18px;">
+            <button class="btn" style="background:var(--green); color:#000; margin-bottom:12px" onclick="trade('BUY')">OPEN POSITION</button>
             <button class="btn" style="background:var(--red)" onclick="trade('SELL')">CLOSE POSITION</button>
         </div>
     </div>
-    <div id="p-ptf" class="page"><h3>💼 PORTOFOLIO</h3><div id="ptfList"></div></div>
-    <div id="p-lib" class="page"><h3>📖 PERPUSTAKAAN AUDIT</h3><div id="libList"></div></div>
+    
+    <div id="p-ptf" class="page"><h3>PORTFOLIO STATUS</h3><div id="ptfList"></div></div>
+    
+    <div id="p-lib" class="page"><h3>AUDIT LIBRARY</h3><div id="libList"></div></div>
 </div>
 
 <div id="reader">
-    <button onclick="document.getElementById('reader').style.display='none'" style="background:red; color:white; padding:10px 20px; border:none; float:right; border-radius:8px;">TUTUP</button>
-    <h2 id="rTitle" style="margin-top:45px; color:red"></h2><hr style="border:1px solid #222; margin:15px 0">
-    <div id="rBody" style="line-height:1.8; color:#eee; text-align:justify; white-space: pre-wrap; padding-bottom:50px;"></div>
+    <button onclick="document.getElementById('reader').style.display='none'" style="background:var(--red); color:white; padding:10px 25px; border:none; float:right; border-radius:8px; font-weight:bold;">TUTUP</button>
+    <h2 id="rTitle" style="margin-top:50px; color:var(--red)"></h2><hr style="border:1px solid #222; margin:20px 0">
+    <div id="rBody" style="line-height:1.9; color:#ccc; white-space: pre-wrap; font-size:16px; text-align:justify;"></div>
+    <button id="exportBtn" class="btn" style="background:#333; margin-top:30px; border:1px solid #555;">SAVE AS TXT (EXPORT)</button>
 </div>
 
 <div class="nav-container">
-    <div class="nav-btn active" onclick="tab('p-mkt',this)"><span>📊</span>Pasar</div>
-    <div class="nav-btn" onclick="tab('p-ord',this)"><span>⚡</span>Order</div>
-    <div class="nav-btn" onclick="tab('p-ptf',this)"><span>💼</span>Porto</div>
-    <div class="nav-btn" onclick="tab('p-lib',this)"><span>📖</span>Audit</div>
+    <div class="nav-btn active" onclick="tab('p-mkt',this)"><span>📊</span><b>Pasar</b></div>
+    <div class="nav-btn" onclick="tab('p-ord',this)"><span>📈</span><b>Audit</b></div>
+    <div class="nav-btn" onclick="tab('p-ptf',this)"><span>💼</span><b>Porto</b></div>
+    <div class="nav-btn" onclick="tab('p-lib',this)"><span>📖</span><b>Ilmu</b></div>
 </div>
 
 <script>
     let cash = 4202013060;
     let porto = [];
-    let assets = [
+    const assets = [
         {s:'BMRI', n:'Bank Mandiri', p:7250, tv:'IDX:BMRI', fx:false},
         {s:'BBRI', n:'Bank Rakyat Indonesia', p:4850, tv:'IDX:BBRI', fx:false},
         {s:'TLKM', n:'Telkom Indonesia', p:3950, tv:'IDX:TLKM', fx:false},
-        {s:'AMRT', n:'Sumber Alfaria Trijaya', p:3100, tv:'IDX:AMRT', fx:false},
+        {s:'AMRT', n:'Alfamart', p:3100, tv:'IDX:AMRT', fx:false},
         {s:'ICBP', n:'Indofood CBP', p:11850, tv:'IDX:ICBP', fx:false},
-        {s:'GOLD', n:'Emas Dunia', p:2150.75, tv:'OANDA:XAUUSD', fx:true},
-        {s:'EURUSD', n:'Euro / Dollar', p:1.0920, tv:'FX:EURUSD', fx:true},
+        {s:'GOLD', n:'XAU/USD (Emas)', p:2150.75, tv:'OANDA:XAUUSD', fx:true},
         {s:'USDJPY', n:'Dollar / Yen', p:151.45, tv:'FX:USDJPY', fx:true},
         {s:'BTC', n:'Bitcoin', p:68500.50, tv:'BINANCE:BTCUSDT', fx:true}
     ];
 
-    setInterval(() => {
-        let totalPL = 0;
-        assets.forEach(a => { a.p += (Math.random() - 0.5) * (a.p * 0.0008); });
-        porto.forEach(item => {
-            let live = assets.find(a => a.s === item.s).p;
-            let mult = item.isFx ? 16000 : 100;
-            item.pl = (live - item.buy) * item.q * mult;
-            totalPL += item.pl;
-        });
-        document.getElementById('dispEquity').innerText = "Rp " + Math.round(cash + totalPL).toLocaleString();
-        renderMkt(); renderPtf();
-    }, 1000);
-
     function renderMkt() {
         let h = '';
         assets.forEach(a => {
-            h += `<div class="card" onclick="openOrd('${a.s}')"><div style="display:flex; justify-content:space-between"><div><b>${a.s}</b><br><small style="color:gray">${a.n}</small></div><b style="color:lime">${a.p.toLocaleString(undefined,{minimumFractionDigits: a.fx?2:0})}</b></div></div>`;
+            h += `<div class="card" onclick="openOrd('${a.s}')">
+                    <div><b style="font-size:18px;">${a.s}</b><br><small style="color:var(--gray)">${a.n}</small></div>
+                    <b style="color:var(--green); font-size:18px;">${a.p.toLocaleString(undefined,{minimumFractionDigits: a.fx?2:0})}</b>
+                  </div>`;
         });
         document.getElementById('mktList').innerHTML = h;
     }
@@ -112,17 +120,29 @@
     function renderPtf() {
         let h = '';
         porto.forEach((i) => {
-            let cl = i.pl >= 0 ? 'lime' : 'red';
-            h += `<div class="card"><div style="display:flex; justify-content:space-between"><b>${i.s}</b><span style="color:${cl}">Rp ${Math.round(i.pl).toLocaleString()}</span></div><small style="color:gray">Avg: ${i.buy.toLocaleString()} | Qty: ${i.q}</small></div>`;
+            let cl = i.pl >= 0 ? 'var(--green)' : 'var(--red)';
+            h += `<div class="card"><div><b>${i.s}</b><br><small>Avg: ${i.buy.toLocaleString()}</small></div><b style="color:${cl}">Rp ${Math.round(i.pl).toLocaleString()}</b></div>`;
         });
-        document.getElementById('ptfList').innerHTML = h || '<p style="text-align:center; padding:20px; color:gray">No active positions.</p>';
+        document.getElementById('ptfList').innerHTML = h || '<p style="text-align:center; padding:40px; color:var(--gray)">Belum ada aset.</p>';
     }
+
+    setInterval(() => {
+        let totalPL = 0;
+        assets.forEach(a => { a.p += (Math.random() - 0.5) * (a.p * 0.002); });
+        porto.forEach(item => {
+            let live = assets.find(a => a.s === item.s).p;
+            let mult = item.isFx ? 16000 : 100;
+            item.pl = (live - item.buy) * item.q * mult;
+            totalPL += item.pl;
+        });
+        document.getElementById('dispEquity').innerText = "Rp " + Math.round(cash + totalPL).toLocaleString();
+        if(document.getElementById('p-mkt').classList.contains('active')) renderMkt();
+    }, 1000);
 
     function openOrd(s) {
         window.curS = s;
-        document.getElementById('ordSym').innerText = "TERMINAL " + s;
-        let tv = assets.find(a => a.s === s).tv;
-        document.getElementById('chartBox').innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${tv}&theme=dark" style="width:100%;height:100%;border:none;"></iframe>`;
+        document.getElementById('ordSym').innerText = "AUDIT " + s;
+        document.getElementById('chartBox').innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${assets.find(a=>a.s===s).tv}&theme=dark&style=1" style="width:100%;height:100%;border:none;"></iframe>`;
         tab('p-ord', document.querySelectorAll('.nav-btn')[1]);
     }
 
@@ -130,12 +150,8 @@
         if(!window.curS) return;
         let a = assets.find(x => x.s === window.curS);
         let q = parseInt(document.getElementById('qty').value);
-        if(type === 'BUY') {
-            porto.push({s:window.curS, q:q, buy:a.p, pl:0, isFx:a.fx}); alert("POSISI DIBUKA");
-        } else {
-            let i = porto.findIndex(x => x.s === window.curS);
-            if(i > -1) { cash += porto[i].pl; porto.splice(i,1); alert("POSISI DITUTUP"); }
-        }
+        if(type === 'BUY') { porto.push({s:window.curS, q:q, buy:a.p, pl:0, isFx:a.fx}); alert("ORDER EXECUTED"); }
+        else { let i = porto.findIndex(x => x.s === window.curS); if(i > -1) { cash += porto[i].pl; porto.splice(i,1); alert("POSITION CLOSED"); } }
     }
 
     function tab(id, el) {
@@ -143,24 +159,36 @@
         document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         el.classList.add('active');
+        if(id === 'p-ptf') renderPtf();
+        if(id === 'p-mkt') renderMkt();
     }
 
     const libs = [
-        {t: "Audit Investasi 5 Menit", c: "1. Revenue Growth: Pendapatan harus naik minimal 10% secara tahunan.\n2. NPM (Net Profit Margin): Laba bersih terhadap pendapatan harus stabil.\n3. Arus Kas Operasi: Wajib positif dan menutupi laba bersih.\n4. DER (Debt to Equity): Rasio utang harus sehat (di bawah 1 untuk non-bank)."},
-        {t: "Protokol Black Swan", c: "Tindakan saat krisis:\n- Pantau GDP Indonesia (Alert jika < 4%).\n- Amankan aset ke sektor defensif (ICBP/GOLD).\n- Jangan panik selama fundamental perusahaan tetap kuat menurut audit 5 menit."},
-        {t: "Audit Sektor Perbankan (BMRI/BBRI)", c: "Khusus Bank:\n- NIM (Net Interest Margin): Target di atas 5%.\n- NPL (Non-Performing Loan): Wajib di bawah 3%.\n- LDR: Cek likuiditas bank dalam menyalurkan kredit."}
+        {t: "Audit Fundamental 5 Menit", c: "1. Revenue Growth: > 10% YoY.\n2. Net Profit Margin: Stabil/Naik.\n3. Cash Flow: Wajib Positif.\n4. DER: < 1.\n5. ROE: > 15%."},
+        {t: "Black Swan & Makro Strategi", c: "Jika GDP melambat di bawah 4%, pindahkan aset ke sektor defensif (ICBP/AMRT/GOLD). Jangan panik saat market crash, audit fundamental aset Anda. [cite: 2025-12-30]"},
+        {t: "Misi Power Growth", c: "Gunakan DCA (Dollar Cost Averaging) pada saham Blue Chip dan cari saham Multibagger dengan PBV < 1."},
+        {t: "Audit Perbankan", c: "Pantau NIM (> 5%), NPL (< 3%), dan LDR (80-90%). BMRI & BBRI adalah jangkar portofolio."},
+        {t: "Psikologi & Privasi N", c: "Kontrol emosi, gunakan data riil pasar [cite: 2026-01-01], dan jaga privasi data Anda dengan super ketat [cite: 2025-12-28]."}
     ];
 
     let lH = '';
     libs.forEach((l, i) => { lH += `<div class="card" onclick="openLib(${i})"><b>${l.t}</b></div>`; });
     document.getElementById('libList').innerHTML = lH;
+    
     function openLib(i) { 
-        document.getElementById('rTitle').innerText = libs[i].t; 
-        document.getElementById('rBody').innerText = libs[i].c; 
+        const title = libs[i].t; const body = libs[i].c;
+        document.getElementById('rTitle').innerText = title; 
+        document.getElementById('rBody').innerText = body; 
         document.getElementById('reader').style.display='block'; 
+        document.getElementById('exportBtn').onclick = () => {
+            const blob = new Blob([`CATATAN SAHAMPRO BY.N\n\n${title}\n\n${body}`], {type: "text/plain"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url; a.download = `Audit_${title.replace(/ /g,"_")}.txt`; a.click();
+            alert("Laporan berhasil diekspor.");
+        };
     }
     renderMkt();
 </script>
 </body>
 </html>
-                        
